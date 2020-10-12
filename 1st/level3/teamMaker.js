@@ -12,7 +12,7 @@ const makeTeam = (num) =>{
     const team = new Array(num);
     const obNum = obMembers.length / num -1;
     const ybNum = ybMembers.length / num -1;
-    // 몫으로 일단 나누고
+    // 몫으로 일단 팀원을 나누고...
     for(let i = 0; i < num; i++){
         team[i] = Array();
         for(let o = 0; o < obNum; o++){
@@ -22,7 +22,7 @@ const makeTeam = (num) =>{
             team[i].push(ybMembers.pop());
         }
     }
-    // 나머지는 랜덤하게 배정
+    // 나머지 랜덤하게 배정
     while (obMembers.length){
         team[Math.floor(Math.random()*num)].unshift(obMembers.pop())
     }
