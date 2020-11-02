@@ -62,7 +62,7 @@ router.delete('/:idx', (req, res) => {
 router.put('/:idx', (req, res) => {
     const {idx} = req.params;
     const {name,part,age} = req.body;
-
+    console.log(idx)
     if(!idx){
     console.log('필요한 값이 없습니다!');
     return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST,responseMessage.NULL_VALUE));
