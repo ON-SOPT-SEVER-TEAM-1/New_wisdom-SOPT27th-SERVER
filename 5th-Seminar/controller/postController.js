@@ -1,14 +1,15 @@
 const util = require('../modules/util');
 const responseMessage = require('../modules/responseMessage');
 const statusCode = require('../modules/statusCode');
-const {User, Post, Like} = require('../models');
-
+const { User, Post, Like } = require('../models');
+const { postService } = require('../service');
 
 module.exports = {
     createPost : async (req, res) => {
         const {userId, title, contents} = req.body;
+        const postImageUrl = req.file.location;
         try{
-            const post = await Post.create({UserId : userId, title, contents});
+            const post = await postService.writePost(userId, title, contents, postImageUrl);
             return res.status(statusCode.OK).send(util.success(statusCode.OK,responseMessage.CREATE_POST_SUCCESS,post));
         } catch(error){
             console.error(error);

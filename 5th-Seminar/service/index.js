@@ -1,3 +1,6 @@
+const postService = require('./postService');
+
 module.exports = {
-    userService : require('./userService')
+    userService : require('./userService'),
+    postService : require('./postService')
 }
