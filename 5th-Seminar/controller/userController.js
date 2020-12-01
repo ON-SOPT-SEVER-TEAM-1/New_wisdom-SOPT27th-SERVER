@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const util = require('../modules/util');
 const responseMessage = require('../modules/responseMessage');
 const statusCode = require('../modules/statusCode');
-const { User } = require('../models');
+const { User, Post } = require('../models');
 const {userService} = require('../service');
 module.exports = {
     signup : async (req, res) => {
@@ -85,6 +85,9 @@ module.exports = {
         // 2. id값이 유효한지 체크! 존재하지 않는 아이디면 NO_USER 반환
         try {
             const user = await User.findOne({
+                include : {
+                    model : Post
+                },
                 where : {
                     id : id,
                 },
