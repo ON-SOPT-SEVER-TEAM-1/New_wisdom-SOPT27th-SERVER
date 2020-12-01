@@ -1,20 +1,7 @@
 const crypto = require('crypto');
 const { userInfo } = require('os');
-const { User } = require('../models');
+const { User, Post } = require('../models');
 module.exports = {
-    readOneEmail : async (email) => {
-        try{
-            //3. 존재하는 이메일인지 확인하기. 이미 존재하는 이메일면 ALREADY ID 반환
-            const alreadyEmail = await User.findOne({
-                where : {
-                    email : email,
-                }
-            });
-            return alreadyEmail;
-        }catch(error){
-            throw error;
-        }
-    },
     signup : async(email,userName, password)=>{
         try{
             //4. salt 생성
@@ -32,5 +19,47 @@ module.exports = {
         }catch(error){
             throw error;
         }
-    }
+    },
+    isAlreadyEmail : async (email) => {
+        try{
+            //3. 존재하는 이메일인지 확인하기. 이미 존재하는 이메일면 ALREADY ID 반환
+            const alreadyEmail = await User.findOne({
+                where : {
+                    email : email,
+                }
+            });
+            return alreadyEmail;
+        }catch(error){
+            throw error;
+        }
+    },
+    readOne : async (id) => {
+        try{
+            const user = await User.findOne({
+                include : {
+                    model : Post
+                },
+                where : {
+                    id : id,
+                },
+                attributes : ['id','email','userName'],
+            });
+            return user;
+        }catch(error){
+            throw error;
+        }
+    },
+    readAll : async () => {
+        try{
+            const users = await User.findAll({
+                include : {
+                    model : Post
+                },
+                attributes : ['id','email','userName'],
+            });
+            return users;
+        }catch(error){
+            throw error;
+        }
+    },
 }

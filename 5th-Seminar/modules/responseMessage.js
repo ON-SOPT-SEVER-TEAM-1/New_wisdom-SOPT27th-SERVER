@@ -20,7 +20,7 @@ module.exports = {
 
   /* User */
   READ_USER_SUCCESS: "사용자 조회 성공",
-  READ_USER_ALL_SUCCESS: "전체 사용자 조회 실패",
+  READ_USER_ALL_SUCCESS: "전체 사용자 조회 성공",
   READ_USER_FAIL: "사용자 조회 성공",
   READ_USER_ALL_FAIL: "전체 사용자 조회 실패",
   UPDATE_USER_SUCCESS: "사용자 업데이트 성공",
