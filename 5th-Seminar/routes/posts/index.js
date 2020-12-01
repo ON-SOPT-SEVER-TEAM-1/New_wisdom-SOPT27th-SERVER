@@ -7,5 +7,6 @@ const postController = require('../../controller/postController');
 router.post('/', upload.single('image'), postController.createPost);
 router.get('/', postController.readAllPosts);
 router.post('/:postId/like',postController.createLike);
+router.delete('/:postId/like',postController.deleteLike);
 
 module.exports = router;

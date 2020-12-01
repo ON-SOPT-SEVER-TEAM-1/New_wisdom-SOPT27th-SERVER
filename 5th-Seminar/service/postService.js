@@ -1,4 +1,4 @@
-const { Post } = require('../models');
+const { Post, Like } = require('../models');
 
 module.exports = {
     createPost : async (userId, title, contents, postImageUrl) => {
@@ -9,4 +9,25 @@ module.exports = {
             throw error;
         }
     },
+    createLike : async (PostId, UserId) => {
+        try {
+            const like = await Like.create({PostId, UserId});
+            return like;
+        } catch (error) {
+            throw error;
+        }
+    },
+    deleteLike : async (PostId, UserId) => {
+        try {
+            const result = await Like.destroy({
+                where : {
+                    PostId : PostId,
+                    UserId : UserId
+                } 
+            });
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
 }

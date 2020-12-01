@@ -38,11 +38,22 @@ module.exports = {
         const PostId = req.params.postId;
         const UserId = req.body.userId;
         try{
-            const like = await Like.create({PostId, UserId});
+            const like = await postService.createLike(PostId, UserId);
             return res.status(statusCode.OK).send(util.success(statusCode.OK,responseMessage.CREATE_LIKE_SUCCESS, like));
         } catch(error){
             console.error(error);
             return res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.success(statusCode.INTERNAL_SERVER_ERROR,responseMessage.CREATE_LIKE_FAIL));
+        }
+    },
+    deleteLike : async (req, res) => {
+        const PostId = req.params.postId;
+        const UserId = req.body.userId;
+        try {
+            const result = await postService.deleteLike(PostId, UserId);
+            return res.status(statusCode.OK).send(util.success(statusCode.OK,responseMessage.DELETE_LIKE_SUCCESS, result));
+        } catch (error) {
+            console.error(error);
+            return res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.success(statusCode.INTERNAL_SERVER_ERROR,responseMessage.DELETE_LIKE_FAIL));
         }
     }
 }
